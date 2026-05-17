@@ -1,4 +1,4 @@
-# MagicWorker
+# TinyWorker
 
 > Simplifying the use of Web Workers — call worker functions like regular async functions
 
@@ -11,17 +11,17 @@
 ##  Installation
 
 ```bash
-npm install @microui-kit/magic-worker
+npm install @tinyhref/tiny-worker
 or
-yarn add @microui-kit/magic-worker
+yarn add @tinyhref/tiny-worker
 ```
 
 ## Use It
 
 ```js
-import { MagicWorker } from '@microui-kit/magic-worker';
+import { TinyWorker } from '@tinyhref/tiny-worker';
 
-const worker = MagicWorker.init({
+const worker = TinyWorker.init({
   methods: {
     counter: 0,
     inc() {
@@ -39,13 +39,13 @@ const worker = MagicWorker.init({
   imports: ['https://unpkg.com/lodash@4.17.21/lodash.js']
 });
 
-const channelSharedWorker = MagicWorker.createWorker('channel', {
+const channelSharedWorker = TinyWorker.createWorker('channel', {
   isSharedWorker: true,
   workerType: 'module',
   methods: {
     multiply: async (a: number, b: number) => {
       console.log('lodash', lodash)
-      
+
       return a * b;
     }
   },

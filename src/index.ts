@@ -31,7 +31,7 @@ interface CallbackPair {
   reject: (reason?: any) => void;
 }
 
-interface MagicWorkerOptions {
+interface TinyWorkerOptions {
   methods: Record<string, any>;
   imports?: ImportsType;
   isSharedWorker?: boolean;
@@ -48,28 +48,28 @@ interface EventMap {
 
 declare const workerMethods: any;
 
-class MagicWorkerClass {
-  private static sdk: MagicWorkerClass | undefined;
+class TinyWorkerClass {
+  private static sdk: TinyWorkerClass | undefined;
   public worker: AnyWorker | null = null;
   private callbacks: Record<string, CallbackPair> = {};
   private counter: number = 0;
   private events: EventMap = {};
 
-  static instance(): MagicWorkerClass {
+  static instance(): TinyWorkerClass {
     if (!this.sdk) {
-      this.sdk = new MagicWorkerClass();
+      this.sdk = new TinyWorkerClass();
     }
 
     return this.sdk;
   }
 
-  constructor(options?: MagicWorkerOptions) {
+  constructor(options?: TinyWorkerOptions) {
     if (options) {
       this.init(options);
     }
   }
 
-  init(options: MagicWorkerOptions): MagicWorkerClass['worker'] {
+  init(options: TinyWorkerOptions): TinyWorkerClass['worker'] {
     if (!this.worker) {
       this.createWorker(WORKER_NAME.MAIN, options);
     }
@@ -77,7 +77,7 @@ class MagicWorkerClass {
     return this.worker
   }
 
-  createWorker(workerName: string, options: MagicWorkerOptions): MagicWorkerClass['worker'] {
+  createWorker(workerName: string, options: TinyWorkerOptions): TinyWorkerClass['worker'] {
     const { methods, imports, isSharedWorker, workerType } = options;
 
     if (!methods) {
@@ -516,6 +516,6 @@ class MagicWorkerClass {
   }
 }
 
-export const MagicWorker = MagicWorkerClass.instance();
+export const TinyWorker = TinyWorkerClass.instance();
 
-export default MagicWorker;
+export default TinyWorker;
